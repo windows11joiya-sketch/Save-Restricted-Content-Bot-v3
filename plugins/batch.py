@@ -424,6 +424,10 @@ async def text_handler(c, m):
     uid = m.from_user.id
     if uid not in Z: return
     s = Z[uid].get('step')
+    x = await get_ubot(uid)
+    if not x:
+        await message.reply("Add your bot /setbot `token`")
+        return
 
     if s == 'start':
         L = m.text
@@ -545,3 +549,4 @@ async def text_handler(c, m):
         finally:
             await remove_active_batch(uid)
             Z.pop(uid, None)
+
